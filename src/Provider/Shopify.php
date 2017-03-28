@@ -70,7 +70,11 @@ class Shopify extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return sprintf('https://%s.%s/admin/shop.json?access_token=%s', $this->store, self::BASE_SHOPIFY_DOMAIN, $token->getToken());
+        return sprintf(
+            'https://%s.%s/admin/shop.json?access_token=%s',
+            $this->store, self::BASE_SHOPIFY_DOMAIN,
+            $token->getToken()
+        );
     }
 
     /**
