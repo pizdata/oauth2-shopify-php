@@ -72,7 +72,8 @@ class Shopify extends AbstractProvider
     {
         return sprintf(
             'https://%s.%s/admin/shop.json?access_token=%s',
-            $this->store, self::BASE_SHOPIFY_DOMAIN,
+            $this->store,
+            self::BASE_SHOPIFY_DOMAIN,
             $token->getToken()
         );
     }
