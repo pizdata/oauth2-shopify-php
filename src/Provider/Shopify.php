@@ -70,7 +70,7 @@ class Shopify extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        // code
+        return sprintf('https://%s.%s/admin/shop.json?access_token=%s', $this->store, self::BASE_SHOPIFY_DOMAIN, $token->getToken());
     }
 
     /**
@@ -97,8 +97,12 @@ class Shopify extends AbstractProvider
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
+        if ($response->getStatusCode() == 400) {
+            throw new ShopifyIdentityProviderException($data, 0, $response->getReasonPhrase());
+        }
+
         if (!empty($data['errors'])) {
-            throw new ShopifyIdentityProviderException($data['errors'], 0);
+            throw new ShopifyIdentityProviderException($data['errors'], 0, $data);
         }
     }
 

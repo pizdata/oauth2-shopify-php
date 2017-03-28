@@ -20,7 +20,77 @@ $ composer require pizdata/oauth2-shopify-php
 ## Usage
 
 ``` php
-$provider = new Pizdata\OAuth2\Client\Provider();
+$provider = new Pizdata\OAuth2\Client\Provider\Shopify([
+    'clientId'                => '{shopify-client-id}',    // The client ID assigned to you by the Shopify
+    'clientSecret'            => '{shopify-client-secret}',   // The client password assigned to you by the Shopify
+    'redirectUri'             => 'http://localhost/callback', // The redirect URI assigned to you
+    'store'                   => 'my-test-store', // The Store name
+]);
+
+// If we don't have an authorization code then get one
+if (!isset($_GET['code'])) {
+
+    // Setting up scope
+    $options = [
+        'scope' => [
+            'read_content', 'write_content',
+            'read_themes', 'write_themes',
+            'read_products', 'write_products',
+            'read_customers', 'write_customers',
+            'read_orders', 'write_orders',
+            'read_draft_orders', 'write_draft_orders',
+            'read_script_tags', 'write_script_tags',
+            'read_fulfillments', 'write_fulfillments',
+            'read_shipping', 'write_shipping',
+            'read_analytics',
+        ]
+    ];
+    // Fetch the authorization URL from the provider; this returns the
+    // urlAuthorize option and generates and applies any necessary parameters
+    // (e.g. state).
+    $authorizationUrl = $provider->getAuthorizationUrl($options);
+
+    // Get the state generated for you and store it to the session.
+    $_SESSION['oauth2state'] = $provider->getState();
+
+    // Redirect the user to the authorization URL.
+    header('Location: ' . $authorizationUrl);
+    exit;
+
+// Check given state against previously stored one to mitigate CSRF attack
+} elseif (empty($_GET['state']) || (isset($_SESSION['oauth2state']) && $_GET['state'] !== $_SESSION['oauth2state'])) {
+
+    if (isset($_SESSION['oauth2state'])) {
+        unset($_SESSION['oauth2state']);
+    }
+    
+    exit('Invalid state');
+
+} else {
+
+    try {
+        // Try to get an access token using the authorization code grant.
+        $accessToken = $provider->getAccessToken('authorization_code', [
+            'code' => $_GET['code']
+        ]);
+
+        $store = $provider->getResourceOwner($accessToken);
+
+        // Access to Store base information
+        echo $store->getName();
+        echo $store->getEmail();
+        echo $store->getDomain();
+
+        // Use this to interact with an API on the users behalf
+        echo $token->getToken();
+
+    } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
+        // Failed to get the access token or user details.
+        exit($e->getMessage());
+
+    }
+}
+
 ```
 
 ## Change log
