@@ -6,4 +6,3 @@ class ShopifyIdentityProviderException extends IdentityProviderException
 {
 
 }
-

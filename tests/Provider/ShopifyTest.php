@@ -57,4 +57,3 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/admin/oauth/access_token', $uri['path']);
     }
 }
-

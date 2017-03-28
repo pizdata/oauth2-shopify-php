@@ -74,4 +74,3 @@ class ShopifyResourceOwner implements ResourceOwnerInterface
         return $this->getValueByKey($this->response, 'shop');
     }
 }
-
