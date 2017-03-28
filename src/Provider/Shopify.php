@@ -116,3 +116,4 @@ class Shopify extends AbstractProvider
         return $store;
     }
 }
+
