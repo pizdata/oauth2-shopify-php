@@ -14,7 +14,7 @@
 Via Composer
 
 ``` bash
-$ composer require pizdata/oauth2-shopify-php
+$ composer require pizdata/oauth2-shopify
 ```
 
 ## Usage
@@ -127,11 +127,11 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/pizdata/oauth2-shopify-php.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/pizdata/oauth2-shopify-php.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pizdata/oauth2-shopify-php
+[link-packagist]: https://packagist.org/packages/pizdata/oauth2-shopify
 [link-travis]: https://travis-ci.org/pizdata/oauth2-shopify-php
 [link-scrutinizer]: https://scrutinizer-ci.com/g/pizdata/oauth2-shopify-php/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/pizdata/oauth2-shopify-php
-[link-downloads]: https://packagist.org/packages/pizdata/oauth2-shopify-php
+[link-downloads]: https://packagist.org/packages/pizdata/oauth2-shopify
 [link-author]: https://github.com/sevastyanovio
 [link-contributors]: ../../contributors
 [link-oauth2-league]: https://github.com/thephpleague/oauth2-client
