@@ -4,6 +4,25 @@ use Mockery as m;
 
 class ShopifyResourceOwnerTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     *
+     * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::__construct
+     * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::toArray
+     */
+    public function testConstruct()
+    {
+        $response = [
+            'shop' => [
+                'data' => 'data'
+            ]
+        ];
+
+        $user = new \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner($response);
+
+        $this->assertEquals($user->toArray(), $response['shop']);
+    }
+
     /**
      *
      * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::getEmail

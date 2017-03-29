@@ -95,13 +95,14 @@ class Shopify extends AbstractProvider
     /**
      * Check a provider response for errors.
      *
-     * @throws IdentityProviderException
+     * @throws \Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException
      * @param  ResponseInterface $response
      * @param  array $data
      * @return void
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
+
         if ($response->getStatusCode() == 400) {
             throw new ShopifyIdentityProviderException($data, 0, $response->getReasonPhrase());
         }

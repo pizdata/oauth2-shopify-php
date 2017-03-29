@@ -25,14 +25,39 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
+    /**
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::__construct
+     * @expectExceptionMessage 'The "store" option not set. Please set a Store name.'
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNoStoreName()
+    {
+        $provider = new \Pizdata\OAuth2\Client\Provider\Shopify([
+            'clientId' => 'mock_client_id',
+            'clientSecret' => 'mock_secret',
+            'redirectUri' => 'none',
+        ]);
+    }
 
     /**
      *
-     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getAuthorizationUrl
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getDefaultScopes
+     */
+    public function testDefaultScope()
+    {
+        $url = $this->provider->getAuthorizationUrl();
+        $uri = parse_url($url);
+
+        $this->assertRegexp('/scope=read_orders,read_products/', urldecode($uri['query']));
+    }
+
+    /**
+     *
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getBaseAuthorizationUrl
      */
     public function testGetAuthorizationUrl()
     {
-        $url = $this->provider->getAuthorizationUrl();
+        $url = $this->provider->getBaseAuthorizationUrl();
         $uri = parse_url($url);
 
         $this->assertEquals('/admin/oauth/authorize', $uri['path']);
@@ -50,6 +75,50 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
         $uri = parse_url($url);
 
         $this->assertEquals('/admin/oauth/access_token', $uri['path']);
+    }
+
+    /**
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::checkResponse
+     * @expectedException \Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException
+     */
+    public function testWrongResponse400Code()
+    {
+        $response = m::mock('Psr\Http\Message\ResponseInterface');
+
+        $response->shouldReceive('getBody')->andReturn(
+            '"Wrong data"'
+        );
+        $response->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
+        $response->shouldReceive('getStatusCode')->andReturn(400);
+        $response->shouldReceive('getReasonPhrase')->andReturn('Wrong data');
+
+        $client = m::mock('GuzzleHttp\ClientInterface');
+        $client->shouldReceive('send')->times(1)->andReturn($response);
+        $this->provider->setHttpClient($client);
+
+        return $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+    }
+
+    /**
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::checkResponse
+     * @expectedException \Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException
+     */
+    public function testWrongResponseErrors()
+    {
+        $response = m::mock('Psr\Http\Message\ResponseInterface');
+
+        $response->shouldReceive('getBody')->andReturn(
+            '{"errors":"Error"}'
+        );
+        $response->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
+        $response->shouldReceive('getStatusCode')->andReturn(401);
+        $response->shouldReceive('getReasonPhrase')->andReturn('Wrong data');
+
+        $client = m::mock('GuzzleHttp\ClientInterface');
+        $client->shouldReceive('send')->times(1)->andReturn($response);
+        $this->provider->setHttpClient($client);
+
+        return $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
     }
 
     /**
