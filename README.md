@@ -14,7 +14,7 @@
 Via Composer
 
 ``` bash
-$ composer require pizdata/oauth2-shopify
+$ composer require pizdata/oauth2-shopify-php
 ```
 
 ## Usage
@@ -120,18 +120,18 @@ If you discover any security related issues, please email roman+gh@sevastyanov.i
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pizdata/oauth2-shopify.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pizdata/oauth2-shopify-php.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pizdata/oauth2-shopify/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pizdata/oauth2-shopify.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pizdata/oauth2-shopify.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pizdata/oauth2-shopify.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pizdata/oauth2-shopify-php/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pizdata/oauth2-shopify-php.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pizdata/oauth2-shopify-php.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pizdata/oauth2-shopify-php.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pizdata/oauth2-shopify
-[link-travis]: https://travis-ci.org/pizdata/oauth2-shopify
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pizdata/oauth2-shopify/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pizdata/oauth2-shopify
-[link-downloads]: https://packagist.org/packages/pizdata/oauth2-shopify
+[link-packagist]: https://packagist.org/packages/pizdata/oauth2-shopify-php
+[link-travis]: https://travis-ci.org/pizdata/oauth2-shopify-php
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pizdata/oauth2-shopify-php/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pizdata/oauth2-shopify-php
+[link-downloads]: https://packagist.org/packages/pizdata/oauth2-shopify-php
 [link-author]: https://github.com/sevastyanovio
 [link-contributors]: ../../contributors
 [link-oauth2-league]: https://github.com/thephpleague/oauth2-client

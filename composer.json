@@ -1,5 +1,5 @@
 {
-    "name": "pizdata/oauth2-shopify",
+    "name": "pizdata/oauth2-shopify-php",
     "type": "library",
     "description": "Shopify OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
     "keywords": [
@@ -11,7 +11,7 @@
         "authorisation",
         "shopify"
     ],
-    "homepage": "https://github.com/pizdata/oauth2-shopify",
+    "homepage": "https://github.com/pizdata/oauth2-shopify-php",
     "license": "MIT",
     "authors": [
         {
