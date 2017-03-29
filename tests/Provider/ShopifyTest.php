@@ -179,9 +179,12 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
             ->times(2)
             ->andReturn($postResponse, $userResponse);
         $this->provider->setHttpClient($client);
+
         $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
         $store = $this->provider->getResourceOwner($token);
         $storeArray = $store->toArray();
+
+        $this->assertEquals(get_class($store), 'Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner');
 
         $this->assertEquals($id, $store->getId());
         $this->assertEquals($name, $store->getName());
