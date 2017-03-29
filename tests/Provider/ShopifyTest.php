@@ -25,20 +25,11 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    public function testAuthorizationUrl()
-    {
-        $url = $this->provider->getAuthorizationUrl();
-        $uri = parse_url($url);
-        parse_str($uri['query'], $query);
 
-        $this->assertArrayHasKey('client_id', $query);
-        $this->assertArrayHasKey('redirect_uri', $query);
-        $this->assertArrayHasKey('state', $query);
-        $this->assertArrayHasKey('scope', $query);
-        $this->assertArrayHasKey('response_type', $query);
-        $this->assertNotNull($this->provider->getState());
-    }
-
+    /**
+     *
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getAuthorizationUrl
+     */
     public function testGetAuthorizationUrl()
     {
         $url = $this->provider->getAuthorizationUrl();
@@ -47,6 +38,10 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/admin/oauth/authorize', $uri['path']);
     }
 
+    /**
+     *
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getBaseAccessTokenUrl
+     */
     public function testGetBaseAccessTokenUrl()
     {
         $params = [];
@@ -57,6 +52,10 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/admin/oauth/access_token', $uri['path']);
     }
 
+    /**
+     *
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getResourceOwnerDetailsUrl
+     */
     public function testResourceOwnerDetailsUrl()
     {
         $uri = $this->provider->getResourceOwnerDetailsUrl($this->getToken());
@@ -82,6 +81,15 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
         return $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
     }
 
+    /**
+     *
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::checkResponse
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getAccessToken
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getDefaultScopes
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getResourceOwner
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::createResourceOwner
+     * @covers \Pizdata\OAuth2\Client\Provider\Shopify::getResourceOwnerDetailsUrl
+     */
     public function testUserData()
     {
         $id = rand(1000,9999);
