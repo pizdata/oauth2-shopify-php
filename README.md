@@ -24,7 +24,7 @@ $provider = new Pizdata\OAuth2\Client\Provider\Shopify([
     'clientId'                => '{shopify-client-id}',    // The client ID assigned to you by the Shopify
     'clientSecret'            => '{shopify-client-secret}',   // The client password assigned to you by the Shopify
     'redirectUri'             => 'http://localhost/callback', // The redirect URI assigned to you
-    'store'                   => 'my-test-store', // The Store name
+    'shop'                    => 'pizdata.myshopify.com', // The Shop name
 ]);
 
 // If we don't have an authorization code then get one

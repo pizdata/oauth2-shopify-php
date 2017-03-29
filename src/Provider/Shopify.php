@@ -8,13 +8,6 @@ use Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException;
 class Shopify extends AbstractProvider
 {
     /**
-     * Production Shopify domain.
-     *
-     * @const string
-     */
-    const BASE_SHOPIFY_DOMAIN = 'myshopify.com';
-
-    /**
      * The store name.
      *
      * @var string
@@ -31,12 +24,12 @@ class Shopify extends AbstractProvider
     {
         parent::__construct($options, $collaborators);
 
-        if (empty($options['store'])) {
-            $message = 'The "store" option not set. Please set a Store name.';
+        if (empty($options['shop'])) {
+            $message = 'The "shop" option not set. Please set a Shop name.';
             throw new \InvalidArgumentException($message);
         }
 
-        $this->store = $options['store'];
+        $this->store = $options['shop'];
     }
 
     /**
@@ -46,7 +39,7 @@ class Shopify extends AbstractProvider
      */
     public function getBaseAuthorizationUrl()
     {
-        return sprintf('https://%s.%s/admin/oauth/authorize', $this->store, self::BASE_SHOPIFY_DOMAIN);
+        return sprintf('https://%s/admin/oauth/authorize', $this->store);
     }
 
     /**
@@ -58,7 +51,7 @@ class Shopify extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params)
     {
-        return sprintf('https://%s.%s/admin/oauth/access_token', $this->store, self::BASE_SHOPIFY_DOMAIN);
+        return sprintf('https://%s/admin/oauth/access_token', $this->store);
     }
 
     /**
@@ -71,9 +64,8 @@ class Shopify extends AbstractProvider
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
         return sprintf(
-            'https://%s.%s/admin/shop.json?access_token=%s',
+            'https://%s/admin/shop.json?access_token=%s',
             $this->store,
-            self::BASE_SHOPIFY_DOMAIN,
             $token->getToken()
         );
     }

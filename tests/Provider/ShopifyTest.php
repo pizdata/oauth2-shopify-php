@@ -15,7 +15,7 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
             'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none',
-            'store' => 'mock_domain',
+            'shop' => 'mock_domain',
         ]);
     }
 
@@ -27,7 +27,7 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \Pizdata\OAuth2\Client\Provider\Shopify::__construct
-     * @expectExceptionMessage 'The "store" option not set. Please set a Store name.'
+     * @expectExceptionMessage 'The "shop" option not set. Please set a Shop name.'
      * @expectedException \InvalidArgumentException
      */
     public function testNoStoreName()
