@@ -120,12 +120,12 @@ If you discover any security related issues, please email roman+gh@sevastyanov.i
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pizdata/oauth2-shopify-php.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pizdata/oauth2-shopify-php/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pizdata/oauth2-shopify-php.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pizdata/oauth2-shopify-php.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pizdata/oauth2-shopify-php.svg?style=flat-square
+[ico-version]: https://poser.pugx.org/pizdata/oauth2-shopify/v/stable
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg
+[ico-travis]: https://img.shields.io/travis/pizdata/oauth2-shopify-php/master.svg
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pizdata/oauth2-shopify-php.svg
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pizdata/oauth2-shopify-php.svg
+[ico-downloads]: https://poser.pugx.org/pizdata/oauth2-shopify/downloads
 
 [link-packagist]: https://packagist.org/packages/pizdata/oauth2-shopify
 [link-travis]: https://travis-ci.org/pizdata/oauth2-shopify-php
