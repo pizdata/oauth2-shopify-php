@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-[Shopify OAuth 2.0][link-oauth2-shopify] Client Provider for [The PHP League OAuth2-Client][link-oauth2-league].
+[Shopify OAuth 2.0][link-oauth2-shopify] Client Provider.
 
 ## Install
 
@@ -134,5 +134,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/pizdata/oauth2-shopify
 [link-author]: https://github.com/sevastyanovio
 [link-contributors]: ../../contributors
-[link-oauth2-league]: https://github.com/thephpleague/oauth2-client
 [link-oauth2-shopify]: https://help.shopify.com/api/getting-started/authentication/oauth
