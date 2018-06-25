@@ -13,6 +13,16 @@ class Shopify extends AbstractProvider
      * @var string
      */
     public $store = '';
+    
+    /**
+     * The default scopes.
+     *
+     * @var string
+     */
+    protected $defaultScopes = [
+        'read_orders',
+        'read_products'
+    ];
 
     /**
      * @param array $options
@@ -78,10 +88,7 @@ class Shopify extends AbstractProvider
      */
     protected function getDefaultScopes()
     {
-        return [
-            'read_orders',
-            'read_products'
-        ];
+        return $this->defaultScopes;
     }
 
     /**
