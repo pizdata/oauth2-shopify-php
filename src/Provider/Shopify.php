@@ -1,10 +1,16 @@
-<?php namespace Pizdata\OAuth2\Client\Provider;
+<?php
 
+namespace Pizdata\OAuth2\Client\Provider;
+
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException;
 
+/**
+ * @package Pizdata\OAuth2\Client\Provider
+ */
 class Shopify extends AbstractProvider
 {
     /**
@@ -18,7 +24,7 @@ class Shopify extends AbstractProvider
      * @param array $options
      * @param array $collaborators
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($options = [], array $collaborators = [])
     {
@@ -26,7 +32,7 @@ class Shopify extends AbstractProvider
 
         if (empty($options['shop'])) {
             $message = 'The "shop" option not set. Please set a Shop name.';
-            throw new \InvalidArgumentException($message);
+            throw new InvalidArgumentException($message);
         }
 
         $this->store = $options['shop'];
@@ -45,7 +51,7 @@ class Shopify extends AbstractProvider
     /**
      * Get access token url to retrieve token
      *
-     * @param  array $params
+     * @param array $params
      *
      * @return string
      */
@@ -57,7 +63,7 @@ class Shopify extends AbstractProvider
     /**
      * Get provider url to fetch user details
      *
-     * @param  AccessToken $token
+     * @param AccessToken $token
      *
      * @return string
      */
@@ -87,10 +93,10 @@ class Shopify extends AbstractProvider
     /**
      * Check a provider response for errors.
      *
-     * @throws \Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException
-     * @param  ResponseInterface $response
-     * @param  array $data
+     * @param ResponseInterface $response
+     * @param array $data
      * @return void
+     * @throws ShopifyIdentityProviderException
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
@@ -108,12 +114,10 @@ class Shopify extends AbstractProvider
      *
      * @param array $response
      * @param AccessToken $token
-     * @return League\OAuth2\Client\Provider\ResourceOwnerInterface
+     * @return ShopifyResourceOwner
      */
     protected function createResourceOwner(array $response, AccessToken $token)
     {
-        $store = new ShopifyResourceOwner($response);
-
-        return $store;
+        return new ShopifyResourceOwner($response);
     }
 }
