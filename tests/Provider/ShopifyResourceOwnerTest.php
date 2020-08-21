@@ -1,12 +1,16 @@
-<?php namespace Pizdata\Shopify\OAuth2\Client\Test\Provider;
+<?php
 
-use Mockery as m;
+namespace Pizdata\Shopify\OAuth2\Client\Test\Provider;
 
-class ShopifyResourceOwnerTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+use Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner;
+
+/**
+ * @package Pizdata\Shopify\OAuth2\Client\Test\Provider
+ */
+class ShopifyResourceOwnerTest extends PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::__construct
      * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::toArray
      */
@@ -18,32 +22,29 @@ class ShopifyResourceOwnerTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $user = new \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner($response);
+        $user = new ShopifyResourceOwner($response);
 
         $this->assertEquals($user->toArray(), $response['shop']);
     }
 
     /**
-     *
      * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::getEmail
      */
     public function testEmailIsNullWithoutAnyAdditionalData()
     {
-        $user = new \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner();
-
+        $user = new ShopifyResourceOwner();
         $email = $user->getEmail();
 
         $this->assertNull($email);
     }
 
     /**
-     *
      * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::getId
      */
     public function testResourceId()
     {
         $id = rand(1, 10000);
-        $store = new \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner([
+        $store = new ShopifyResourceOwner([
             'shop' => [
                 'id' => $id
             ]
@@ -53,13 +54,12 @@ class ShopifyResourceOwnerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
      * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::getDomain
      */
     public function testResourceDomain()
     {
         $domain = 'mock-domain.com';
-        $store = new \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner([
+        $store = new ShopifyResourceOwner([
             'shop' => [
                 'domain' => $domain
             ]
@@ -70,13 +70,12 @@ class ShopifyResourceOwnerTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     *
      * @covers \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner::getName
      */
     public function testResourceName()
     {
         $name = 'mock-name';
-        $store = new \Pizdata\OAuth2\Client\Provider\ShopifyResourceOwner([
+        $store = new ShopifyResourceOwner([
             'shop' => [
                 'name' => $name
             ]
