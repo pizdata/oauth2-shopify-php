@@ -161,7 +161,7 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
      */
     public function testUserData()
     {
-        $id = rand(1000,9999);
+        $id = rand(1000, 9999);
         $name = uniqid();
         $email = uniqid();
         $postResponse = m::mock('Psr\Http\Message\ResponseInterface');
