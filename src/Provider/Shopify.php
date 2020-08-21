@@ -1,5 +1,6 @@
 <?php namespace Pizdata\OAuth2\Client\Provider;
 
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Provider\AbstractProvider;
@@ -26,7 +27,7 @@ class Shopify extends AbstractProvider
 
         if (empty($options['shop'])) {
             $message = 'The "shop" option not set. Please set a Shop name.';
-            throw new \InvalidArgumentException($message);
+            throw new InvalidArgumentException($message);
         }
 
         $this->store = $options['shop'];
