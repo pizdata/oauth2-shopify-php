@@ -94,7 +94,7 @@ class Shopify extends AbstractProvider
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
-        if ($response->getStatusCode() == 400) {
+        if ($response->getStatusCode() === 400) {
             throw new ShopifyIdentityProviderException($data, 0, $response->getReasonPhrase());
         }
 
