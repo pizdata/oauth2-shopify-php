@@ -2,14 +2,15 @@
 
 use League\OAuth2\Client\Tool\QueryBuilderTrait;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
-class ShopifyTest extends \PHPUnit_Framework_TestCase
+class ShopifyTest extends TestCase
 {
     use QueryBuilderTrait;
 
     protected $provider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->provider = new \Pizdata\OAuth2\Client\Provider\Shopify([
             'clientId' => 'mock_client_id',
@@ -19,7 +20,7 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
         parent::tearDown();
@@ -27,11 +28,12 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \Pizdata\OAuth2\Client\Provider\Shopify::__construct
-     * @expectExceptionMessage 'The "shop" option not set. Please set a Shop name.'
-     * @expectedException \InvalidArgumentException
      */
     public function testNoStoreName()
     {
+        $this->expectExceptionMessage('The "shop" option not set. Please set a Shop name.');
+        $this->expectException(\InvalidArgumentException::class);
+
         $provider = new \Pizdata\OAuth2\Client\Provider\Shopify([
             'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
@@ -79,10 +81,11 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \Pizdata\OAuth2\Client\Provider\Shopify::checkResponse
-     * @expectedException \Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException
      */
     public function testWrongResponse400Code()
     {
+        $this->expectException(\Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException::class);
+        
         $response = m::mock('Psr\Http\Message\ResponseInterface');
 
         $response->shouldReceive('getBody')->andReturn(
@@ -101,10 +104,11 @@ class ShopifyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \Pizdata\OAuth2\Client\Provider\Shopify::checkResponse
-     * @expectedException \Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException
      */
     public function testWrongResponseErrors()
     {
+        $this->expectException(\Pizdata\OAuth2\Client\Exception\ShopifyIdentityProviderException::class);
+        
         $response = m::mock('Psr\Http\Message\ResponseInterface');
 
         $response->shouldReceive('getBody')->andReturn(
