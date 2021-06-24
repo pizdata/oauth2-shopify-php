@@ -1,8 +1,9 @@
 <?php namespace Pizdata\Shopify\OAuth2\Client\Test\Provider;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
-class ShopifyResourceOwnerTest extends \PHPUnit_Framework_TestCase
+class ShopifyResourceOwnerTest extends TestCase
 {
 
     /**
